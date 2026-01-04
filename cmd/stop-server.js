@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { listRunningServers } from './list-running-servers.js'
-import { makeDockerCall } from './utils.js'
+import { dockerCommands, makeDockerCall } from './utils.js'
 
 export const stopServerCommand = new SlashCommandBuilder().setName('stop-server').setDescription('Stops the specified minecraft server')
   .addStringOption(
@@ -25,5 +25,5 @@ export const stopServerFunction = async (interaction) => {
   const serverToStop = interaction.options.getString('server')
   await interaction.reply(`Stopping minecraft server: \`${serverToStop}\`.`)
 
-  await makeDockerCall(`docker stop ${serverToStop}`)
+  await makeDockerCall(dockerCommands.stop(serverToStop))
 }

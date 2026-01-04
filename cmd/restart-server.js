@@ -4,7 +4,7 @@
 // wait till server is up again, send a message @ the Minecraft role saying "Server is back up!"
 
 import { SlashCommandBuilder } from 'discord.js'
-import { containerRecheckLoop, convertMsToISO, makeDockerCall } from './utils.js'
+import { containerRecheckLoop, convertMsToISO, dockerCommands, makeDockerCall } from './utils.js'
 import { checkPlayerCount } from './check-player-count.js'
 
 export const restartServerCommand = new SlashCommandBuilder().setName('restart-server').setDescription('Restarts the specified minecraft server')
@@ -35,7 +35,7 @@ export const restartServerFunction = async (interaction) => {
   const startTime = Date.now()
   const sinceTime = convertMsToISO(startTime)
 
-  await makeDockerCall(`docker restart ${serverToRestart}`)
+  await makeDockerCall(dockerCommands.restart(serverToRestart))
 
   await containerRecheckLoop(
     interaction,

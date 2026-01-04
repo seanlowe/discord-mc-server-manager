@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js'
 
 import { listRunningServers } from './list-running-servers.js'
-import { makeDockerCall, allowedMinecraftServerNames } from './utils.js'
+import { makeDockerCall, allowedMinecraftServerNames, dockerCommands } from './utils.js'
 
 export const checkPlayerCountCommand = new SlashCommandBuilder().setName('check-player-count')
   .setDescription('Replies with the number of players online for the given server')
@@ -17,7 +17,7 @@ export const checkPlayerCountCommand = new SlashCommandBuilder().setName('check-
 export const checkPlayerCount = async (serverName, shortFormat = false) => {
   // makes an assumption that server has rcon enabled and running on port 25575
   try {
-    const response = await makeDockerCall(`docker exec ${serverName} rcon-cli -- list`)
+    const response = await makeDockerCall(dockerCommands.execRcon(serverName, ["list"]))
     
     // returns something like:
     // There are 0 of a max of 20 players online:

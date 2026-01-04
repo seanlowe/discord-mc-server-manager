@@ -5,7 +5,7 @@ import { constants, writeFileSync, readFileSync } from "node:fs"
 // use a command builder instead of string shenanigans
 // to determine what gets passed to execa
 // when using, do a [command ...args] to get startingCommand and commandsArray
-const dockerCommands = {
+export const dockerCommands = {
   psAllJson: () => {
     return ["docker", "ps", "-a", "--format", "{{json .}}"]
   },
@@ -56,7 +56,6 @@ export const convertMsToISO = (ms) => {
 }
 
 export const getDockerContainers = async () => {
-  // const result = await makeDockerCall("docker ps -a --format '{{json .}}'")
   const result = await makeDockerCall(dockerCommands.psAllJson())
 
   const rawContainerOutput = result.split('\n').map(line => JSON.parse(line))

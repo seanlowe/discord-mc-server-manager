@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js'
 import { listAvailableServers } from './list-available-servers.js'
-import { makeDockerCall, convertMsToISO, containerRecheckLoop } from './utils.js'
+import { makeDockerCall, convertMsToISO, containerRecheckLoop, dockerCommands } from './utils.js'
 
 export const startServerCommand = new SlashCommandBuilder().setName('start-server').setDescription('Starts the specified minecraft server')
   .addStringOption(
@@ -28,7 +28,7 @@ export const startServerFunction = async (interaction) => {
   const startTime = Date.now()
   const sinceTime = convertMsToISO(startTime)
 
-  await makeDockerCall(`docker start ${serverToStart}`)
+  await makeDockerCall(dockerCommands.start(serverToStart))
 
   await containerRecheckLoop(
     interaction,

@@ -1,0 +1,21 @@
+{
+  "name": "discord-mc-server-bot",
+  "version": "1.0.0",
+  "main": "discord-mc-server-manager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./discord-mc-server-manager.js",
+    "start": "npx pm2 start ./ecosystem.config.js --env production"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "dotenv": "^17.2.3",
+    "execa": "^9.6.1",
+    "express": "^5.2.1",
+    "pm2": "^6.0.14"
+  },
+  "type": "module"
+}

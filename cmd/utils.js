@@ -1,11 +1,15 @@
 import { execa } from 'execa'
 import { access } from "node:fs/promises"
-import { constants, writeFileSync } from "node:fs"
+import { constants, writeFileSync, readFileSync } from "node:fs"
 
-import allowedMinecraftServers from '../data/allowed-minecraft-servers.json' with { type: 'json' }
+const allowedMinecraftServers = JSON.parse(
+  readFileSync(
+    new URL("../data/allowed-minecraft-servers.json", import.meta.url),
+    "utf8"
+  )
+)
 
 export const allowedMinecraftServerNames = allowedMinecraftServers.map(server => server.name)
-export const allowedMinecraftServersJson = allowedMinecraftServers
 
 export const fileExists = async (path) => {
   try {

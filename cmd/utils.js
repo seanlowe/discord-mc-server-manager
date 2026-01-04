@@ -22,8 +22,8 @@ export const dockerCommands = {
     return ["docker", "exec", serverName, "rcon-cli", "--", ...rconArgs]
   },
   logsGrep: (sinceTime, serverName) => {
-    // `docker logs --since ${sinceTime} ${serverName} | grep -F "[minecraft/DedicatedServer]: Done"`
-    return ["docker", "logs", "--since", sinceTime, serverName, "|", "grep", "-F", "[minecraft/DedicatedServer]: Done"]
+    // needs these escaped quotes because that's the search term for grep
+    return ["docker", "logs", "--since", sinceTime, serverName, "|", "grep", "-F", "\"[minecraft/DedicatedServer]: Done\""]
   }
 }
 

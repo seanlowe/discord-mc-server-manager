@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node ./discord-mc-server-manager.js",
-    "start": "npx pm2 start ./ecosystem.config.js --env production"
+    "start": "npx pm2 start ./ecosystem.config.cjs --env production"
   },
   "author": "",
   "license": "ISC",
